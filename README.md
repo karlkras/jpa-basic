@@ -32,7 +32,8 @@ You'll need to define a admin user.
                         <xa-datasource-class>com.mysql.cj.jdbc.MysqlXADataSource</xa-datasource-class>
                     </driver>
      ```   
-        NOTE: if using v5 of the connector, the xa-datasource-class value will have a different classpath.   
+        NOTE: if using v5 of the connector, the xa-datasource-class value will have a different classpath:   
+        com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
      
    4. Start wildfly with standalone.bat from command line -   
    `$> [wildfly-home]\bin\standalone.bat`   
