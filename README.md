@@ -6,7 +6,7 @@ This repo provides a baseline on how to work with WildFly to setup a datasource 
 For purposes of this demo, I'm using WildFly v20 though 19 should work perfectly well too.
 1) Download, install, and configure a local instance of the [wildfly server](https://www.wildfly.org/downloads/)  
 You'll need to define a admin user.
-2. Define the mysql connector to the server (this is using the latest version 8, 5 has been tested as well).  
+2. Define the mysql connector to the server (this is using the latest version 8. Version 5 has been tested as well).  
    1. [Download the connector](https://dev.mysql.com/downloads/connector/j/)  
       Exract contained `mysql-connector-java-8xxx.jar` file.   
       Copy this to [wildfly-home]\modules\system\layers\base\com\mysql\main (you will probably have to create the `mysql\main` subdirectories).
@@ -22,8 +22,19 @@ You'll need to define a admin user.
      </dependencies>
     </module>
     ```   
-       and again, Copy this to [wildfly-home]\modules\system\layers\base\com\mysql\main
-   3. Start wildfly with standalone.bat from command line -   
+       and again, Copy this to [wildfly-home]\modules\system\layers\base\com\mysql\main   
+       
+   3. Navigate to the `standalone.xml` file found under `[wildfly-home]/configuration`  
+     In this file search for the existing `<driver>` entry (should be one for `h2`)  
+     Add a new entry like this:  
+     ``` xml
+                    <driver name="mysql" module="com.mysql">
+                        <xa-datasource-class>com.mysql.cj.jdbc.MysqlXADataSource</xa-datasource-class>
+                    </driver>
+     ```   
+        NOTE: if using v5 of the connector, the xa-datasource-class value will have a different classpath.   
+     
+   4. Start wildfly with standalone.bat from command line -   
    `$> [wildfly-home]\bin\standalone.bat`   
    You should see no errors in the terminal output and should see a couple of lines similar to this:   
    ```
