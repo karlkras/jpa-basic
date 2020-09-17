@@ -10,24 +10,24 @@ public class Sponsor {
 
     @Id
     @Column(name="companyID")
-    private int id;
+    private int key;
 
     private String companyName;
     private int sponsorID;
     private String sponsorName;
     private String status;
 
-    public int getId() {
-        return id;
+    public int getKey() {
+        return key;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setKey(int id) {
+        this.key = id;
     }
 
     @Override
     public String toString() {
-        return "SimpleProperty [id=" + id + ", companyName=" + companyName + ", sponsorID=" + sponsorID + ", sponsorName=" + sponsorName + ", status=" + status + "]";
+        return "Sponsor [id=" + key + ", companyName=" + companyName + ", sponsorID=" + sponsorID + ", sponsorName=" + sponsorName + ", status=" + status + "]";
     }
 
     public String getCompanyName() {

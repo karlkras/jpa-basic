@@ -11,13 +11,7 @@ import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -51,6 +45,28 @@ public class RestService {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return p;
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteMember(Sponsor member) {
+        Response.ResponseBuilder builder;
+        Sponsor p = findById(member.getKey());
+
+        try {
+            ejb.delete(p);
+            // Create an "ok" response
+            builder = Response.ok("Deleted!");
+
+        } catch (Exception e) {
+            // Handle generic exceptions
+            Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("error", e.getMessage());
+            builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+        }
+
+        return builder.build();
     }
 
     @POST

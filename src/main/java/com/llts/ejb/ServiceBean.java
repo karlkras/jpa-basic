@@ -19,10 +19,8 @@ public class ServiceBean {
         em.persist(p);
     }
 
-    @SuppressWarnings("StringBufferReplaceableByString")
     public void delete(Sponsor p) {
-        Query query =
-                em.createQuery(new StringBuilder().append("delete FROM Sponsor p where p.id='").append(p.getId()).append("'").toString());
+        Query query = em.createQuery("delete FROM Sponsor p where p.key='"+p.getKey()+"'");
         query.executeUpdate();
     }
 
@@ -31,7 +29,7 @@ public class ServiceBean {
         return em.createQuery("FROM Sponsor").getResultList();
     }
 
-    public Sponsor findById(int id) {
-        return em.find(Sponsor.class, id);
+    public Sponsor findById(int companyID) {
+        return em.find(Sponsor.class, companyID);
     }
 }
