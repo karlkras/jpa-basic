@@ -56,7 +56,29 @@ You'll need to define a admin user.
    9. The Summary page... nirvana. `Finish`   
    
 This should be all that's needed for WildFly configuration.
+
 ### Intellij
+The following provides a roadmap on how to set this project up for wildfly integration into the Intellij IDE.
+1. Clone and load this project into Intellij.
+2. Make sure the WildFly plugin is installed and enabled:   
+   * Open Settngs: Ctrl+Alt+s
+   * Select Plugins and search for WildFly. I should be installed and enabled. If no, do this.
+3. Edit your persistence.xml file:   
+   * Open the file in the IDE `src/main/java/resources/META-INF/persistence.xml`  
+   * Make sure the entry for `jta-data-source` matches the datasource you defined in `WildFly` from the instructions in the prior section (`3.v`).
+4. Create a run/debug configuration:   
+   1. Select **Run** | **Edit Configurations** from the main menu.
+   2. Select **`+`** and navigate to the `JBoss Server->Local` selection.
+   3. Fill in the fields:    
+      (Optional: You can add your own descriptive name, I left mine default `JBoss 20.0.1.Final`)
+      1. (Server Tab)      
+         * Application server: provide the root location of where you installed your `WildFly` server   
+         * Provide the startup URL. Default should be `http://localhost:8080/jpa-basic`   
+         * JBoss Server Settings section, provide the admin user and password to your locally installed `WildFly` instance.     
+      2. (Deployment Tab)   
+         * Select **`+ > Artifact`** and choose `jpa-basic:war`    
+         * And then **OK**
+
+You should now have a runable configuration when you select the ![screenshot](https://github.com/karlkras/jpa-basic/blob/master/images/runconfig.jpg)  
+The server should start and land on index.html page of the jpa-basic war.
    
-* do this  
-* do that
