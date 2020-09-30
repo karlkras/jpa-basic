@@ -10,7 +10,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @Stateless
-public class ServiceBean {
+public class SponsorServiceBean {
 
     @PersistenceContext
     private EntityManager em;
@@ -20,7 +20,7 @@ public class ServiceBean {
     }
 
     public void delete(Sponsor p) {
-        Query query = em.createQuery("delete FROM Sponsor p where p.key='"+p.getKey()+"'");
+        Query query = em.createQuery("delete FROM Sponsor p where p.companyID='"+p.getKey()+"'");
         query.executeUpdate();
     }
 
@@ -31,5 +31,20 @@ public class ServiceBean {
 
     public Sponsor findById(int companyID) {
         return em.find(Sponsor.class, companyID);
+    }
+
+    public Sponsor findByCompanyName(String companyName) {
+        Sponsor sponsor = null;
+        Query query = em.createQuery(
+                "SELECT s FROM Sponsor s where s.companyName=:companyName");
+        query.setParameter("companyName", companyName);
+
+        try {
+            sponsor = (Sponsor) query.getSingleResult();
+        } catch (Exception e) {
+            // Handle exception
+        }
+
+        return sponsor;
     }
 }

@@ -2,7 +2,7 @@ package com.llts.rest;
 
 
 
-import com.llts.ejb.ServiceBean;
+import com.llts.ejb.SponsorServiceBean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,12 +22,12 @@ import com.llts.model.Sponsor;
  * <p/>
  * This class produces a RESTful service to read/write the contents of the members table.
  */
-@Path("/action")
+@Path("sponsor/action")
 @RequestScoped
-public class RestService {
+public class SponsorRestService {
 
     @Inject
-    private ServiceBean ejb;
+    private SponsorServiceBean ejb;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,6 +41,18 @@ public class RestService {
     public Sponsor findById(@PathParam("id") int id) {
 
         Sponsor p = ejb.findById(id);
+        if (p == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return p;
+    }
+
+    @GET
+    @Path("/cn/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Sponsor findByCompanyName(@PathParam("name") String name) {
+
+        Sponsor p = ejb.findByCompanyName(name);
         if (p == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
