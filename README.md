@@ -24,7 +24,7 @@ You'll need to define a admin user.
     ```   
        and again, Copy this to [wildfly-home]\modules\system\layers\base\com\mysql\main   
        
-   3. Navigate to the `standalone.xml` file found under `[wildfly-home]/configuration`  
+   3. Navigate to the `standalone.xml` file found under `[wildfly-home]/standalone/configuration`  
      In this file search for the existing `<driver>` entry (should be one for `h2`)  
      Add a new entry like this:  
      ``` xml
