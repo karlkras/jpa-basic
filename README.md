@@ -10,11 +10,11 @@ You'll need to define an admin user.
    1. [Download the connector](https://dev.mysql.com/downloads/connector/j/)  
       Exract contained `mysql-connector-java-8xxx.jar` file.   
       Copy this to [wildfly-home]\modules\system\layers\base\com\mysql\main (you will probably have to create the `mysql\main` subdirectories).
-   2. Create a module.xml file with the following content   
+   2. Create a module.xml file with the following content (make sure to update the `{subversion}` with the actual connector jar you're using):   
     ``` xml
     <module xmlns="urn:jboss:module:1.5" name="com.mysql">
      <resources>
-      <resource-root path="mysql-connector-java-8xxx.jar" />
+      <resource-root path="mysql-connector-java-8{subversion}.jar" />
      </resources>
      <dependencies>
       <module name="javax.api"/>
