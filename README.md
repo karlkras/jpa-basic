@@ -5,7 +5,7 @@ This repo provides a baseline on how to work with WildFly to setup a datasource 
 ### WildFly
 For purposes of this demo, I'm using WildFly v20 though 19 should work perfectly well too.
 1) Download, install, and configure a local instance of the [wildfly server](https://www.wildfly.org/downloads/)  
-You'll need to define a admin user.
+You'll need to define an admin user.
 2. Define the mysql connector to the server (this is using the latest version 8. Version 5 has been tested as well).  
    1. [Download the connector](https://dev.mysql.com/downloads/connector/j/)  
       Exract contained `mysql-connector-java-8xxx.jar` file.   
